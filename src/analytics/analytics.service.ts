@@ -4,8 +4,10 @@ import { IAnalyticsStore } from "./analytics.store";
 import { ANALYTICS_STORE } from "./analytics.tokens";
 import {
   AnalyticsFillEvent,
+  AnalyticsGroupedQuery,
   AnalyticsQuery,
   FeesPoint,
+  GroupedPoint,
   LatencyPoint,
   SolverSharePoint,
   VolumePoint,
@@ -41,6 +43,11 @@ export class AnalyticsService {
 
   getSolverShare(query: AnalyticsQuery): Promise<SolverSharePoint[]> {
     return this.store.querySolverShare(query);
+  }
+
+  /** Ad-hoc `volume`/`fees` aggregate grouped by any subset of chain/token/solver. */
+  getGrouped(query: AnalyticsGroupedQuery): Promise<GroupedPoint[]> {
+    return this.store.queryGrouped(query);
   }
 
   // ── ingestion ─────────────────────────────────────────────────────────────
